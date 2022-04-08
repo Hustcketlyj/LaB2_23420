@@ -10,7 +10,7 @@
 
 
 #include "sim.h"
-
+#include<stdio.h>
 
 void help() {
     printf("--------------------- RISCV LC SIM Help ----------------------\n");
