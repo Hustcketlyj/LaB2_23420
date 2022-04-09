@@ -273,8 +273,11 @@ void handle_slli(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: SLLI\n");
-    exit(EXIT_FAILURE);
+    unsigned int rd = MASK11_7(cur_inst), rs1 = MASK19_15(cur_inst);
+    int imm5 = MASK24_20(cur_inst);
+    NEXT_LATCHES.REGS[rd] = CURRENT_LATCHES.REGS[rs1] << imm5;
+    //warn("Lab2-2 assignment: SLLI\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -283,8 +286,11 @@ void handle_xori(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: XORI\n");
-    exit(EXIT_FAILURE);
+    unsigned int rd = MASK11_7(cur_inst), rs1 = MASK19_15(cur_inst);
+    int imm12 = sext(MASK31_20(cur_inst), 12);
+    NEXT_LATCHES.REGS[rd] = CURRENT_LATCHES.REGS[rs1] ^ imm12;
+    //warn("Lab2-2 assignment: XORI\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -292,8 +298,11 @@ void handle_srli(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: SRLI\n");
-    exit(EXIT_FAILURE);
+    unsigned int rd = MASK11_7(cur_inst), rs1 = MASK19_15(cur_inst);
+    int imm5 = MASK24_20(cur_inst);
+    NEXT_LATCHES.REGS[rd] = CURRENT_LATCHES.REGS[rs1] >> imm5;
+    //warn("Lab2-2 assignment: SRLI\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -301,8 +310,11 @@ void handle_srai(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: SRAI\n");
-    exit(EXIT_FAILURE);
+    unsigned int rd = MASK11_7(cur_inst), rs1 = MASK19_15(cur_inst);
+    int imm5 = MASK24_20(cur_inst);
+    NEXT_LATCHES.REGS[rd] = ((CURRENT_LATCHES.REGS[rs1] >> imm5) | (0xFFFFFFFF << (32-imm5)));
+    //warn("Lab2-2 assignment: SRAI\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -310,8 +322,11 @@ void handle_ori(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: ORI\n");
-    exit(EXIT_FAILURE);
+    unsigned int rd = MASK11_7(cur_inst), rs1 = MASK19_15(cur_inst);
+    int imm12 = sext(MASK31_20(cur_inst), 12);
+    NEXT_LATCHES.REGS[rd] = CURRENT_LATCHES.REGS[rs1] | imm12;
+    //warn("Lab2-2 assignment: ORI\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -319,17 +334,23 @@ void handle_andi(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: ANDI\n");
-    exit(EXIT_FAILURE);
+    unsigned int rd = MASK11_7(cur_inst), rs1 = MASK19_15(cur_inst);
+    int imm12 = sext(MASK31_20(cur_inst), 12);
+    NEXT_LATCHES.REGS[rd] = CURRENT_LATCHES.REGS[rs1] & imm12;
+    //warn("Lab2-2 assignment: ANDI\n");
+    //exit(EXIT_FAILURE);
 }
 
 
 void handle_lui(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
-     */
-    warn("Lab2-2 assignment: LUI\n");
-    exit(EXIT_FAILURE);
+    */
+    unsigned int rd = MASK11_7(cur_inst);
+    int imm20 = sext(MASK31_12(cur_inst),20);
+    NEXT_LATCHES.REGS[rd] = imm20 << 12;
+    //warn("Lab2-2 assignment: LUI\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -356,8 +377,12 @@ void handle_sll(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: SUB\n");
-    exit(EXIT_FAILURE);
+    unsigned int rd = MASK11_7(cur_inst),
+        rs1 = MASK19_15(cur_inst),
+        rs2 = MASK24_20(cur_inst);
+    NEXT_LATCHES.REGS[rd] = CURRENT_LATCHES.REGS[rs1] << CURRENT_LATCHES.REGS[rs2];
+    //warn("Lab2-2 assignment: SUB\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -365,8 +390,12 @@ void handle_xor(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: XOR\n");
-    exit(EXIT_FAILURE);
+    unsigned int rd = MASK11_7(cur_inst),
+		rs1 = MASK19_15(cur_inst),
+        rs2 = MASK24_20(cur_inst);
+    NEXT_LATCHES.REGS[rd] = CURRENT_LATCHES.REGS[rs1] ^ CURRENT_LATCHES.REGS[rs2];
+    //warn("Lab2-2 assignment: XOR\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -374,8 +403,12 @@ void handle_srl(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: SRL\n");
-    exit(EXIT_FAILURE);
+    unsigned int rd = MASK11_7(cur_inst),
+        rs1 = MASK19_15(cur_inst),
+        rs2 = MASK24_20(cur_inst);
+    NEXT_LATCHES.REGS[rd] = CURRENT_LATCHES.REGS[rs1] >> CURRENT_LATCHES.REGS[rs2];
+    //warn("Lab2-2 assignment: SRL\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -383,8 +416,12 @@ void handle_sra(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: SRA\n");
-    exit(EXIT_FAILURE);
+    unsigned int rd = MASK11_7(cur_inst),
+        rs1 = MASK19_15(cur_inst),
+        rs2 = MASK24_20(cur_inst);
+    NEXT_LATCHES.REGS[rd] = (CURRENT_LATCHES.REGS[rs1] >> CURRENT_LATCHES.REGS[rs2] | (0xFFFFFFFF << (32-CURRENT_LATCHES.REGS[rs2])));
+    //warn("Lab2-2 assignment: SRA\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -392,8 +429,12 @@ void handle_or(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: OR\n");
-    exit(EXIT_FAILURE);
+    unsigned int rd = MASK11_7(cur_inst),
+		rs1 = MASK19_15(cur_inst),
+        rs2 = MASK24_20(cur_inst);
+    NEXT_LATCHES.REGS[rd] = CURRENT_LATCHES.REGS[rs1] | CURRENT_LATCHES.REGS[rs2];
+    //warn("Lab2-2 assignment: OR\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -401,8 +442,12 @@ void handle_and(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: AND\n");
-    exit(EXIT_FAILURE);
+    unsigned int rd = MASK11_7(cur_inst),
+		rs1 = MASK19_15(cur_inst),
+        rs2 = MASK24_20(cur_inst);
+    NEXT_LATCHES.REGS[rd] = CURRENT_LATCHES.REGS[rs1] & CURRENT_LATCHES.REGS[rs2];
+    //warn("Lab2-2 assignment: AND\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -410,8 +455,13 @@ void handle_jalr(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: JALR\n");
-    exit(EXIT_FAILURE);
+    unsigned int rd = MASK11_7(cur_inst),
+        rs1 = MASK19_15(cur_inst);
+    int imm12=MASK31_20(cur_inst);
+    NEXT_LATCHES.PC = sext(imm12, 12) + CURRENT_LATCHES.REGS[rs1];
+    NEXT_LATCHES.REGS[rd] = CURRENT_LATCHES.PC + 4;
+    //warn("Lab2-2 assignment: JALR\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -450,8 +500,15 @@ void handle_bne(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: BNE\n");
-    exit(EXIT_FAILURE);
+    unsigned int rs1 = MASK19_15(cur_inst), rs2 = MASK24_20(cur_inst);
+    int imm12 = (MASK31(cur_inst) << 12) + \
+            (MASK7(cur_inst) << 11) + \
+            (MASK30_25(cur_inst) << 5) + \
+            (MASK11_8(cur_inst) << 1);
+    if (CURRENT_LATCHES.REGS[rs1] != CURRENT_LATCHES.REGS[rs2])
+        NEXT_LATCHES.PC = sext(imm12, 12);
+    //warn("Lab2-2 assignment: BNE\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -459,8 +516,15 @@ void handle_blt(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: BLT\n");
-    exit(EXIT_FAILURE);
+    unsigned int rs1 = MASK19_15(cur_inst), rs2 = MASK24_20(cur_inst);
+    int imm12 = (MASK31(cur_inst) << 12) + \
+            (MASK7(cur_inst) << 11) + \
+            (MASK30_25(cur_inst) << 5) + \
+            (MASK11_8(cur_inst) << 1);
+    if (CURRENT_LATCHES.REGS[rs1] < CURRENT_LATCHES.REGS[rs2])
+        NEXT_LATCHES.PC = sext(imm12, 12);
+    //warn("Lab2-2 assignment: BLT\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -468,8 +532,15 @@ void handle_bge(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: BGE\n");
-    exit(EXIT_FAILURE);
+    unsigned int rs1 = MASK19_15(cur_inst), rs2 = MASK24_20(cur_inst);
+    int imm12 = (MASK31(cur_inst) << 12) + \
+            (MASK7(cur_inst) << 11) + \
+            (MASK30_25(cur_inst) << 5) + \
+            (MASK11_8(cur_inst) << 1);
+    if (CURRENT_LATCHES.REGS[rs1] >= CURRENT_LATCHES.REGS[rs2])
+        NEXT_LATCHES.PC = sext(imm12, 12);
+    //warn("Lab2-2 assignment: BGE\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -487,16 +558,22 @@ void handle_lh(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: LH\n");
-    exit(EXIT_FAILURE);
+    unsigned int rd = MASK11_7(cur_inst), rs1 = MASK19_15(cur_inst);
+    int imm12 = MASK31_20(cur_inst);
+    NEXT_LATCHES.REGS[rd] = sext(MASK15_0(MEMORY[sext(imm12, 12) + CURRENT_LATCHES.REGS[rs1]]), 16);
+    //warn("Lab2-2 assignment: LH\n");
+    //exit(EXIT_FAILURE);
 }
 
 void handle_lw(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: LW\n");
-    exit(EXIT_FAILURE);
+    unsigned int rd = MASK11_7(cur_inst), rs1 = MASK19_15(cur_inst);
+    int imm12 = MASK31_20(cur_inst);
+    NEXT_LATCHES.REGS[rd] = sext(MASK31_0(MEMORY[sext(imm12, 12) + CURRENT_LATCHES.REGS[rs1]]), 32);
+    //warn("Lab2-2 assignment: LW\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -504,8 +581,13 @@ void handle_sb(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
-    warn("Lab2-2 assignment: SB\n");
-    exit(EXIT_FAILURE);
+    unsigned int rs1 = MASK19_15(cur_inst)
+    unsigned int rs2 = MASK24_20(cur_inst);
+    int imm12 = MASK11_7(cur_inst) + (MASK31_25(cur_inst) << 5);
+    int8_t tmp = CURRENT_LATCHES.REGS[rs2];
+    MEMORY[sext(imm12, 12) + CURRENT_LATCHES.REGS[rs1]] = tmp;
+    //warn("Lab2-2 assignment: SB\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -513,6 +595,11 @@ void handle_sh(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
+    unsigned int rs1 = MASK19_15(cur_inst)
+    unsigned int rs2 = MASK24_20(cur_inst);
+    int imm12 = MASK11_7(cur_inst) + (MASK31_25(cur_inst) << 5);
+    int16_t tmp = CURRENT_LATCHES.REGS[rs2];
+    MEMORY[sext(imm12, 12) + CURRENT_LATCHES.REGS[rs1]] = tmp;
     warn("Lab2-2 assignment: SH\n");
     exit(EXIT_FAILURE);
 }
@@ -522,6 +609,10 @@ void handle_sw(unsigned int cur_inst) {
     /*
      * Lab2-2 assignment
      */
+    unsigned int rs1 = MASK19_15(cur_inst)
+    unsigned int rs2 = MASK24_20(cur_inst);
+    int imm12 = MASK11_7(cur_inst) + (MASK31_25(cur_inst) << 5);
+    MEMORY[sext(imm12, 12) + CURRENT_LATCHES.REGS[rs1]] = CURRENT_LATCHES.REGS[rs2];
     warn("Lab2-2 assignment: SW\n");
     exit(EXIT_FAILURE);
 }
