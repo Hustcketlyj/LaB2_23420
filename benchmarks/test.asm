@@ -14,10 +14,10 @@
 	sw t1, 0(t2)
 
     la a1, NUM1
-	lw a1, 0(t0)
+	lw a1, 0(a1)
 
 	la a2, NUM2
-	lw a2, 0(t1)
+	lw a2, 0(a2)
 
 	halt
 
