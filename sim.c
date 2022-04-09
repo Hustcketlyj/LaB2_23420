@@ -600,8 +600,8 @@ void handle_sh(unsigned int cur_inst) {
     int imm12 = MASK11_7(cur_inst) + (MASK31_25(cur_inst) << 5);
     int16_t tmp = CURRENT_LATCHES.REGS[rs2];
     MEMORY[sext(imm12, 12) + CURRENT_LATCHES.REGS[rs1]] = tmp;
-    warn("Lab2-2 assignment: SH\n");
-    exit(EXIT_FAILURE);
+    //warn("Lab2-2 assignment: SH\n");
+    //exit(EXIT_FAILURE);
 }
 
 
@@ -613,8 +613,8 @@ void handle_sw(unsigned int cur_inst) {
     unsigned int rs2 = MASK24_20(cur_inst);
     int imm12 = MASK11_7(cur_inst) + (MASK31_25(cur_inst) << 5);
     MEMORY[sext(imm12, 12) + CURRENT_LATCHES.REGS[rs1]] = CURRENT_LATCHES.REGS[rs2];
-    warn("Lab2-2 assignment: SW\n");
-    exit(EXIT_FAILURE);
+    //warn("Lab2-2 assignment: SW\n");
+    //exit(EXIT_FAILURE);
 }
 
 
