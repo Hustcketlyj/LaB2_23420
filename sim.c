@@ -685,6 +685,93 @@ void handle_instruction() {
         /*
          * Lab2-2 assignment: Decode other types of RV32I instructions
          */
+        case (0x0D << 2) + 0x03:
+            handle_lui(cur_inst);
+            break;
+        case (0x0C << 2) + 0x03:
+            switch(funct3) {
+                    case 0:
+                        if (MASK31_25(cur_inst) == 0)
+                            handle_add(cur_inst);
+                        else
+                            handle_sub(cur_inst);
+                        break;
+                    case 1:
+                        handle_sll(cur_inst);
+                        break;
+                    case 4:
+                        handle_xor(cur_inst);
+                        break;
+                    case 5:
+                        if (MASK31_25(cur_inst) == 0)
+                            handle_srl(cur_inst);
+                        else
+                            handle_sra(cur_inst);
+                        break;
+                    case 6:
+                        handle_or(cur_inst);
+                        break;
+                    case 7:
+                        handle_and(cur_inst);
+                        break;
+                    default:
+                        error("unknown opcode 0x%08x is captured.\n", cur_inst);
+            }
+            break;
+        case (0x19 << 2) + 0x03:
+            handle_jalr(cur_inst);
+            break;
+        case (0x1B << 2) + 0x03:
+            handle_jal(cur_inst);
+            break;
+        case (0x18 << 2) + 0x03:
+            switch(funct3) {
+                    case 0:
+                        handle_beq(cur_inst);
+                        break;
+                    case 1:
+                        handle_bne(cur_inst);
+                        break;
+                    case 4:
+                        handle_blt(cur_inst);
+                        break;
+                    case 5:
+                        handle_bge(cur_inst);
+                        break;
+                    default:
+                        error("unknown opcode 0x%08x is captured.\n", cur_inst);
+            }
+            break;
+        case 0x03:
+            switch(funct3) {
+                    case 0:
+                        handle_lb(cur_inst);
+                        break;
+                    case 1:
+                        handle_lh(cur_inst);
+                        break;
+                    case 2:
+                        handle_lw(cur_inst);
+                        break;
+                    default:
+                        error("unknown opcode 0x%08x is captured.\n", cur_inst);
+            }
+            break;
+        case (0x08 << 2) + 0x03:
+            switch(funct3) {
+                    case 0:
+                        handle_sb(cur_inst);
+                        break;
+                    case 1:
+                        handle_sh(cur_inst);
+                        break;
+                    case 2:
+                        handle_sw(cur_inst);
+                        break;
+                    default:
+                        error("unknown opcode 0x%08x is captured.\n", cur_inst);
+            }
+            break;
         default:
             error("unknown instruction 0x%08x is captured.\n", cur_inst);
     }
