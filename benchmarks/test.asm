@@ -2,7 +2,9 @@
 # At the beginning, MEMORY[A] = NUM1, MEMORY[B] = NUM2
 # After the execution, MEMORY[A] = NUM2, MEMORY[B] = NUM1
 	la t0, NUM1
-	lh t0, 0(t0)
+	lb t1, 0(t0)
+	lh t2, 0(t0)
+	lw t3, 0(t0)
 
 	halt
 
