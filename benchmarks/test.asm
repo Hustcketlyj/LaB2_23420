@@ -21,7 +21,7 @@
 
     addi t0, zero, 2
     srai a1, a1, 3
-    sra a2, a2, t0
+#    sra a2, a2, t0
 
 	halt
 
