@@ -19,6 +19,10 @@
 	la a2, NUM2
 	lw a2, 0(a2)
 
+    addi t0, zero, 2
+    srai a1, a1, 3
+    sra a2, a2, t0
+
 	halt
 
 NUM1 .fill 0xabcd
